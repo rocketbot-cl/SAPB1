@@ -5,9 +5,9 @@
   "version": "0.1",
   "license": "MIT",
   "homepage": "http://rocketbot.co/",
-  "linux": true,
+  "linux": false,
   "windows": true,
-  "mac": true,
+  "mac": false,
   "docker": false,
   "name": "SAPB1",
   "dependencies": {},
@@ -53,9 +53,9 @@
       "options": false,
       "father": "module",
       "group": "scripts",
-      "linux": true,
+      "linux": false,
       "windows": true,
-      "mac": true,
+      "mac": false,
       "docker": false
     },
     {
@@ -104,9 +104,9 @@
       "options": false,
       "father": "module",
       "group": "scripts",
-      "linux": true,
+      "linux": false,
       "windows": true,
-      "mac": true,
+      "mac": false,
       "docker": false
     },
     {
@@ -183,9 +183,9 @@
       "options": false,
       "father": "module",
       "group": "scripts",
-      "linux": true,
+      "linux": false,
       "windows": true,
-      "mac": true,
+      "mac": false,
       "docker": false
     },
     {
@@ -224,9 +224,9 @@
       "options": false,
       "father": "module",
       "group": "scripts",
-      "linux": true,
+      "linux": false,
       "windows": true,
-      "mac": true,
+      "mac": false,
       "docker": false
     },
     {
@@ -265,9 +265,9 @@
       "options": false,
       "father": "module",
       "group": "scripts",
-      "linux": true,
+      "linux": false,
       "windows": true,
-      "mac": true,
+      "mac": false,
       "docker": false
     }
   ]
