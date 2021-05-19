@@ -3,13 +3,15 @@ Module to automate SAP Business One.
 
 ## Commands
 <ul class="commands_readme">
+    <li>Connect</li>
+    <li>Log in</li>
     <li>Click</li>
-    <li>Set Focus</li>
+    <li>Send Text</li>
+    <li>Activate menu</li>
 </ul>
 
-**In the example robot, its encode a image to base64 and then decode to png.
 
-![alt text](https://i.imgur.com/amkC3If.png)
+![alt text](https://i.imgur.com/KQ2oE0b.png)
 
 
 <h2>License</h2>
