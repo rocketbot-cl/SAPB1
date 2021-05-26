@@ -69,7 +69,7 @@ if module == "click":
     column = GetParams("column")
     print(form_id, item_id)
     try:
-        if row == None or column == None:
+        if not row or not column:
             form = sap_b1.get_form(form_id)
             sap_b1.get_item(form, item_id).Click(0)
         else:
