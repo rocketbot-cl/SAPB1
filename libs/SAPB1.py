@@ -34,10 +34,32 @@ class SAP_B1:
     
     def activate_menu(self, id_menu):
         self.sbo_application.ActivateMenuItem(str(id_menu))
+    
+    def get_value(self, item, row, column):
+        return item.Columns.Item(str(row)).Cells.Item(int(column)).Specific.Value
+
 
 if __name__ == '__main__':
+    import time
     sap_b1 = SAP_B1()
     sap_b1.connect_app()
+    form = sap_b1.get_form("133")
+    #data_source = form.DataSources
+    data_string = sap_b1.get_item(form, "1")
+    id_ = data_string.UniqueID
+    print(id_)
+    form.ActiveItem = id_
+    #sap_b1.sbo_application.Click(0)
+    #' Check a specific item ID is in focus
+    item = form.Items.Item(id_)
+    #item.Click(0)
+    item_spec = item.Specific
+
+    #Dim bActiveItem As Boolean = oComboBox.Active
+    sap_b1.sbo_application.SendKeys("{ENTER}")
+    #item_valor = data_string.Columns.Item(str("V_2")).Cells.Item(int(1))
+    
+
         # 1 BOTON OK
         # 2 Finalizar
         # 4 usuario
