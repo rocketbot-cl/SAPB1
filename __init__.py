@@ -112,7 +112,7 @@ if module == "get_value":
         if not row or not column:
             form = sap_b1.get_form(form_id)
             data_string = sap_b1.get_item(form, str(item_id)).Specific
-            value = str(item_valor.Specific.Value)
+            value = str(data_string.Value)
             SetVar(res, value)
         else:
             form = sap_b1.get_form(str(form_id))
@@ -131,35 +131,6 @@ if module == "pop_up":
     try:
         smbForm = sap_b1.sbo_application.Forms.ActiveForm
         smbForm.Items.Item(str(item_id)).Click()
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
-
-if module == "set_focus":
-    form_id = GetParams("form_id")
-    item_id = GetParams("item_id")
-    row = GetParams("row")
-    column = GetParams("column")    
-    try:
-        if not row or not column:
-            form = sap_b1.get_form(str(form_id))
-            item = sap_b1.get_item(form, str(item_id))
-            id_ = item.UniqueID
-            print(id_)
-            form.ActiveItem = id_
-            active_item = form.Items.Item(id_)
-            item_spec = item.Specific
-        else:
-            form = sap_b1.get_form(str(form_id))
-            data_string = sap_b1.get_item(form, str(item_id)).Specific
-            item_valor = data_string.Columns.Item(str(column)).Cells.Item(int(row))
-            id_ = item.UniqueID
-            print(id_)
-            form.ActiveItem = id_
-            active_item = form.Items.Item(id_)
-            item_spec = item.Specific
     except Exception as e:
         SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
