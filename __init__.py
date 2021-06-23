@@ -67,15 +67,15 @@ if module == "click":
     item_id = GetParams("item_id")
     row = GetParams("row")
     column = GetParams("column")
-    print(form_id, item_id)
+    click_type = GetParams("click_type")
     try:
         if not row or not column:
             form = sap_b1.get_form(form_id)
-            sap_b1.get_item(form, item_id).Click(0)
+            sap_b1.get_item(form, item_id).Click(int(click_type))
         else:
             form = sap_b1.get_form(form_id)
             item = sap_b1.get_specific_item(form, item_id)
-            sap_b1.do_click_grid_item(item, row, column)
+            sap_b1.do_click_grid_item(item, row, column, int(click_type))
     except Exception as e:
         SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")

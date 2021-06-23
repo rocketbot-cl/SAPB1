@@ -28,9 +28,8 @@ class SAP_B1:
     def get_item(self, form, item_id):
         return form.Items.Item(str(item_id))
 
-    def do_click_grid_item(self, item, row, column):
-        double_click = 1
-        item.Columns.Item(str(row)).Cells.Item(int(column)).Click(double_click)
+    def do_click_grid_item(self, item, row, column, click_type):
+        item.Columns.Item(str(row)).Cells.Item(int(column)).Click(click_type)
     
     def activate_menu(self, id_menu):
         self.sbo_application.ActivateMenuItem(str(id_menu))

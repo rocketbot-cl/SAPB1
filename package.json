@@ -172,6 +172,33 @@
             },
             "id": "column",
             "css": "col-md-6"
+          },
+          {
+            "type": "select",
+            "placeholder": {
+              "es": "",
+              "en": ""
+            },
+            "title": {
+              "es": "Tipo",
+              "en": "Type"
+            },
+            "options": [
+              {
+                "title": "Click izquierdo",
+                "value": "0"
+              },
+              {
+                "title": "Doble click",
+                "value": "1"
+              },
+              {
+                "title": "Click derecho",
+                "value": "4"
+              }
+            ],
+            "id": "click_type",
+            "css": "col-md-6"
           }
         ]
       },
