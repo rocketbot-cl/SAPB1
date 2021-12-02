@@ -136,3 +136,18 @@ if module == "pop_up":
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
+
+if module == "combobox":
+    form_id = GetParams("form_id")
+    item_id = GetParams("item_id")
+    value = GetParams("value")
+    try:
+        form = sap_b1.get_form(form_id)
+        data_string = sap_b1.get_item(form, str(item_id)).Specific
+        data_string.Select(str(value))
+    except Exception as e:
+        SetVar(res, False)
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
