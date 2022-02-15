@@ -111,6 +111,7 @@ try:
         item_id = GetParams("item_id")
         row = GetParams("row")
         column = GetParams("column")
+        checkType = GetParams("checkType")
         if not row or not column:
             form = sap_b1.get_form(form_id)
             sap_b1.get_item(form, item_id).Click(int(click_type))
@@ -123,7 +124,7 @@ try:
             else:
                 myItem.Checked = False
 
-except:
+except Exception as e:
     print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
     PrintException()
     raise e
