@@ -38,37 +38,27 @@ module = GetParams("module")
 
 global sap_b1
 
-if module == "connect":
-    res = GetParams("result")
-    try:
+try:
+
+    if module == "connect":
+        res = GetParams("result")
         sap_b1 = SAP_B1()
         sap_b1.connect_app()
-        print(sap_b1)
+        #print(sap_b1)
         SetVar(res, True)
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "login":
-    print(sap_b1)
-    user = GetParams("user")
-    password = GetParams("password")
-    try:
+    if module == "login":
+        #print(sap_b1)
+        user = GetParams("user")
+        password = GetParams("password")
         sap_b1.login(user, password)
-    except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "click":
-    form_id = GetParams("form_id")
-    item_id = GetParams("item_id")
-    row = GetParams("row")
-    column = GetParams("column")
-    click_type = GetParams("click_type")
-    try:
+    if module == "click":
+        form_id = GetParams("form_id")
+        item_id = GetParams("item_id")
+        row = GetParams("row")
+        column = GetParams("column")
+        click_type = GetParams("click_type")
         if not row or not column:
             form = sap_b1.get_form(form_id)
             sap_b1.get_item(form, item_id).Click(int(click_type))
@@ -76,39 +66,21 @@ if module == "click":
             form = sap_b1.get_form(form_id)
             item = sap_b1.get_specific_item(form, item_id)
             sap_b1.do_click_grid_item(item, row, column, int(click_type))
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "activate_menu":
-    menu_id = GetParams("menu_id")
-    try:
+    if module == "activate_menu":
+        menu_id = GetParams("menu_id")
         sap_b1.activate_menu(menu_id)
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "send_text":
-    text = GetParams("text")
-    try:
+    if module == "send_text":
+        text = GetParams("text")
         sap_b1.sbo_application.SendKeys(text)
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "get_value":
-    form_id = GetParams("form_id")
-    item_id = GetParams("item_id")
-    row = GetParams("row")
-    column = GetParams("column")    
-    res = GetParams("res")    
-    try:
+    if module == "get_value":
+        form_id = GetParams("form_id")
+        item_id = GetParams("item_id")
+        row = GetParams("row")
+        column = GetParams("column")    
+        res = GetParams("res")    
         if not row or not column:
             form = sap_b1.get_form(form_id)
             data_string = sap_b1.get_item(form, str(item_id)).Specific
@@ -120,34 +92,38 @@ if module == "get_value":
             item_valor = data_string.Columns.Item(str(column)).Cells.Item(int(row))
             value = str(item_valor.Specific.Value)
             SetVar(res, value)
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "pop_up":
-    item_id = GetParams("item_id")
-    try:
+    if module == "pop_up":
+        item_id = GetParams("item_id")
         smbForm = sap_b1.sbo_application.Forms.ActiveForm
         smbForm.Items.Item(str(item_id)).Click()
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
-if module == "combobox":
-    form_id = GetParams("form_id")
-    item_id = GetParams("item_id")
-    value = GetParams("value")
-    try:
+    if module == "combobox":
+        form_id = GetParams("form_id")
+        item_id = GetParams("item_id")
+        value = GetParams("value")
         form = sap_b1.get_form(form_id)
         data_string = sap_b1.get_item(form, str(item_id)).Specific
         data_string.Select(str(value))
-    except Exception as e:
-        SetVar(res, False)
-        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
-        PrintException()
-        raise e
 
+    if module == "checkBox":
+        form_id = GetParams("form_id")
+        item_id = GetParams("item_id")
+        row = GetParams("row")
+        column = GetParams("column")
+        if not row or not column:
+            form = sap_b1.get_form(form_id)
+            sap_b1.get_item(form, item_id).Click(int(click_type))
+        else:
+            form = sap_b1.get_form(form_id)
+            item = sap_b1.get_specific_item(form, item_id)
+            myItem = form.Items.Item(item_id).Specific.GetCellSpecific(column,int(row)) # C/F
+            if int(checkType) == 0:
+                myItem.Checked = True
+            else:
+                myItem.Checked = False
+
+except:
+    print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+    PrintException()
+    raise e
