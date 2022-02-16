@@ -554,13 +554,13 @@
             },
             {
               "type": "input",
-              "placeholder": "item",
+              "placeholder": "102",
               "title": {
                 "es": "Item",
                 "en": "Item"
               },
               "description": {
-                "es": "102",
+                "es": "ID del item",
                 "en": "Item ID"
               },
               "id": "item_id",
@@ -609,8 +609,8 @@
                 "en": ""
               },
               "title": {
-                "es": "Tipo",
-                "en": "Type"
+                "es": "Tipo de accion",
+                "en": "Action type"
               },
               "options": [
                 {
