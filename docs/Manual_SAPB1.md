@@ -3,10 +3,11 @@
 
 
 # SAPB1
+
+Módulo para automatizar acciones de SAP Business One. Hacer clicks, obtener textos, escribir, entre tantas otras.
   
-Module to automate actions in SAP Business One. Do clicks, get text values, set text in inputs fields and many more.  
-  
-![banner](https://i.imgur.com/GgCMPK1.jpg)
+![banner](imgs/Banner_SAPB1.png)
+
 ## Como instalar este módulo
   
 __Descarga__ e __instala__ el contenido en la carpeta 'modules' en la ruta de rocketbot.  
@@ -74,3 +75,14 @@ Selecciona la opcion de un menu desplegable
 |Form|ID del formulario|255|
 |Item|ID del item|13|
 |Valor|Valor del combobox a elegir|9|
+
+### Click en Checkbox
+  
+Realiza un click en un checkbox teniendo en cuenta el formulario en el que se encuentra y ID
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|Formulario|ID del formulario|59|
+|Item|ID del item|102|
+|Fila|ID de la fila|1|
+|Columna|ID de la columna|5|
+|Tipo de accion|Accion a ejecutar||
