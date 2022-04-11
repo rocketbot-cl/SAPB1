@@ -59,7 +59,7 @@ class SAP_B1:
     def do_click_grid_item(self, item, row, column, click_type):
         # item.Columns.Item(str(row)).Cells.Item(int(column)).Click(click_type)
         q = Queue()
-        t = Thread(target=click_items, args=(item.Columns.Item(str(row)).Cells.Item(int(column)), click_type), daemon=False)
+        t = Thread(target=click_items, args=(item.Columns.Item(str(column)).Cells.Item(int(row)), click_type), daemon=False)
         t.start()
     
     def do_click_item(self, item, click_type):
