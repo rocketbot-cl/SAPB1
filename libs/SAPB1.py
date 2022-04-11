@@ -1,4 +1,18 @@
 import win32com.client
+try:
+    from threading import Thread
+    from queue import Queue, Empty
+except ImportError:
+    from Queue import Queue, Empty  
+
+def click_items(*arr_item, click_type = 0):
+    try:
+        for item in arr_item:
+            item.Click(click_type)
+        
+    except:
+        PrintException()
+
 
 class SAP_B1:
     def __init__(self):
@@ -10,14 +24,28 @@ class SAP_B1:
         self.sbo_gui_api.Connect(self.connection_string)
         self.sbo_application = self.sbo_gui_api.GetApplication(-1)
 
-    def login(self, user, pwd):
-        forms = self.sbo_application.Forms
-        for form in forms:
-            form.Items.Item("4").Click(0)
+    def login(self, user, pwd, society=None):
+        
+        form = self.get_form("821")
+        form.Items.Item("4").Click(0)
+        self.sbo_application.SendKeys(user)
+        form.Items.Item("5").Click(0)
+        self.sbo_application.SendKeys(pwd)
+        print("society")
+        if society:
+            print("queue")
+            q = Queue()
+            t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
+            t.start()
+            form = self.get_form("820")
+            form.Items.Item("1470000132").Click(0)
+            self.sbo_application.SendKeys(society)
+            form.Items.Item("19").Click(0)
             self.sbo_application.SendKeys(user)
-            form.Items.Item("5").Click(0)
+            form.Items.Item("20").Click(0)
             self.sbo_application.SendKeys(pwd)
-            form.Items.Item("1").Click(0)
+        print("click")
+        form.Items.Item("1").Click(0)
 
     def get_form(self, id_form):
         return self.sbo_application.Forms.GetForm(str(id_form), 0)
@@ -29,7 +57,15 @@ class SAP_B1:
         return form.Items.Item(str(item_id))
 
     def do_click_grid_item(self, item, row, column, click_type):
-        item.Columns.Item(str(row)).Cells.Item(int(column)).Click(click_type)
+        # item.Columns.Item(str(row)).Cells.Item(int(column)).Click(click_type)
+        q = Queue()
+        t = Thread(target=click_items, args=(item.Columns.Item(str(row)).Cells.Item(int(column)), click_type), daemon=False)
+        t.start()
+    
+    def do_click_item(self, item, click_type):
+        q = Queue()
+        t = Thread(target=click_items, args=(item, click_type), daemon=False)
+        t.start()
     
     def activate_menu(self, id_menu):
         self.sbo_application.ActivateMenuItem(str(id_menu))
