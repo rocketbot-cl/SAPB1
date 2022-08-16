@@ -96,16 +96,16 @@
             },
             {
               "type": "input",
-              "placeholder": "MLP",
+              "placeholder": "society",
               "title": {
-                "es": "Base de datos",
-                "en": "Database"
+                "es": "Sociedad",
+                "en": "Society"
               },
               "help": {
-                "es": "Dejar vacío si no quieres cambiar la base de dato",
-                "en": "Empty if you don't need change the database"
+                "es": "Dejar vacío si no quieres cambiar la sociedad",
+                "en": "Empty if you don't need to change society"
               },
-              "id": "db",
+              "id": "society",
               "css": "col-md-12"
             }
           ]
