@@ -102,10 +102,10 @@
                 "en": "Society"
               },
               "help": {
-                "es": "Dejar vacío si no quieres cambiar la sociedad",
-                "en": "Empty if you don't need to change society"
+                "es": "Colocar el nombre de la sociedad",
+                "en": "Type the name of the society"
               },
-              "id": "society",
+              "id": "db",
               "css": "col-md-12"
             }
           ]

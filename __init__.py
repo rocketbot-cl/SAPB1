@@ -61,7 +61,7 @@ if module == "login":
     
     user = GetParams("user")
     password = GetParams("password")
-    society = GetParams("society")
+    society = GetParams("db")
     try:
         sap_b1.login(user, password, society)
     except Exception as e:

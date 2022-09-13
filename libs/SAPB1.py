@@ -26,24 +26,27 @@ class SAP_B1:
 
     def login(self, user, pwd, society=None):
         
-        form = self.get_form("821")
-        form.Items.Item("4").Click(0)
-        self.sbo_application.SendKeys(user)
-        form.Items.Item("5").Click(0)
-        self.sbo_application.SendKeys(pwd)
+        try:
+            form = self.get_form("821")
+            form.Items.Item("4").Click(0)
+            self.sbo_application.SendKeys(user)
+            form.Items.Item("5").Click(0)
+            self.sbo_application.SendKeys(pwd)
+        except:
+            pass
         print("society")
         if society:
             print("queue")
             q = Queue()
-            t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
-            t.start()
+            # t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
+            # t.start()
             form = self.get_form("820")
             form.Items.Item("1470000132").Click(0)
-            self.sbo_application.SendKeys(society)
-            form.Items.Item("19").Click(0)
-            self.sbo_application.SendKeys(user)
-            form.Items.Item("20").Click(0)
-            self.sbo_application.SendKeys(pwd)
+            # self.sbo_application.SendKeys(society)
+            # form.Items.Item("19").Click(0)
+            # self.sbo_application.SendKeys(user)
+            # form.Items.Item("20").Click(0)
+            # self.sbo_application.SendKeys(pwd)
         print("click")
         form.Items.Item("1").Click(0)
 
