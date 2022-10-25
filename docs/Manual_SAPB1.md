@@ -3,86 +3,93 @@
 
 
 # SAPB1
-
-Módulo para automatizar acciones de SAP Business One. Hacer clicks, obtener textos, escribir, entre tantas otras.
+  
+Module to automate SAP Business One.  
   
 ![banner](imgs/Banner_SAPB1.png)
 
-## Como instalar este módulo
+## How to install this module
   
-__Descarga__ e __instala__ el contenido en la carpeta 'modules' en la ruta de rocketbot.  
+__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
+## How to use this module
 
+To be able to execute the commands we must take into account that the objects that we find in SAP B1, either an input, button or menu are differentiated by IDs, and some of them are located within rows and columns. In order to know this data, we must activate the "System information" option found in the View menu, or press the Ctrl + Shift + I key combination. Then in the lower left corner we will be able to see the object data. It is important to take this into account when automating since it will be necessary to have the Form ID and Item ID, as well as the column and row, if applicable.
 
-## Descripción de los comandos
+## Description of the commands
 
-### Conectar a SAP B1
+### Connect to SAP B1
   
-Conectarse a una instancia SAP B1
-|Parámetros|Descripción|ejemplo|
+Connect to SAP B1
+|Parameters|Description|example|
 | --- | --- | --- |
-|Asignar resultado a una variable|Asigna el resultado de la ejecución de la tarea a una variable|res|
+|Set result to a variable||result|
 
-### Iniciar sesion en SAP B1
+### Login to SAP B1
   
-Inicia sesion con la instancia de SAP B1 utilizando nombre de usuario y contraseña
-|Parámetros|Descripción|ejemplo|
+Login to SAP B1
+|Parameters|Description|example|
 | --- | --- | --- |
-|Usuario|Nombre de usuario|manager|
-|Contraseña|Contraseña del usuario|manager|
+|User||manager|
+|Password||password|
+|Database name||DBSociety01|
+|Society||2|
 
 ### Click
   
-Realiza un click en un item teniendo en cuenta el formulario en el que se encuentra y ID
-|Parámetros|Descripción|ejemplo|
+Do a click in an item
+|Parameters|Description|example|
 | --- | --- | --- |
-|Formulario|ID del formulario|59|
-|Item|102|item|
-|Fila|ID de la fila|1|
-|Columna|ID de la columna|5|
-|Tipo|Tipo de click||
+|Form||form|
+|Item||item|
+|Row||row|
+|Column||column|
+|Type|||
 
-### Activar item de menu
+### Activate menu item
   
-Activar item de menu por ID.
-|Parámetros|Descripción|ejemplo|
+Activate menu item
+|Parameters|Description|example|
 | --- | --- | --- |
-|Item menu|ID del item de menu a activar|3392|
+|Menu item||3392|
 
-### Enviar texto
+### Send text
   
-Enviar texto a una entrada de texto
-|Parámetros|Descripción|ejemplo|
+Send text to an input
+|Parameters|Description|example|
 | --- | --- | --- |
-|Texto|Texto a enviar.|Hello World!|
+|Text||Hello World!|
 
-### Obtener texto
+### Get text
   
-Obtiene el texto de un item o entrada de texto
-|Parámetros|Descripción|ejemplo|
+Get text from an item
+|Parameters|Description|example|
 | --- | --- | --- |
-|Formulario|ID del formulario|133|
-|Item|ID del item|46|
-|Fila|ID de la fila|1|
-|Columna|ID de la columna|5|
-|Resultado|Asigna el resultado de la ejecución de la tarea a una variable|result|
+|Form||form|
+|Item||item|
+|Row||row|
+|Column||column|
+|Set result to a variable||result|
 
-### Seleccionar combobox
+### Click in pop up
   
-Selecciona la opcion de un menu desplegable
-|Parámetros|Descripción|ejemplo|
+Click in pop up
+|Parameters|Description|example|
 | --- | --- | --- |
-|Form|ID del formulario|255|
-|Item|ID del item|13|
-|Valor|Valor del combobox a elegir|9|
+|Item||item|
 
-### Click en Checkbox
+### Get visible forms and menus data
   
-Realiza un click en un checkbox teniendo en cuenta el formulario en el que se encuentra y ID
-|Parámetros|Descripción|ejemplo|
+Get data of forms and menus. The data will be about visible forms and menus at the momento of the execution.
+|Parameters|Description|example|
 | --- | --- | --- |
-|Formulario|ID del formulario|59|
-|Item|ID del item|102|
-|Fila|ID de la fila|1|
-|Columna|ID de la columna|5|
-|Tipo de accion|Accion a ejecutar||
+|Set result to a variable||result|
+
+### Get visible matrix data
+  
+Get matrix data. The selected Matrix must be visible at the moment of execution.
+|Parameters|Description|example|
+| --- | --- | --- |
+|Form||form|
+|Item||item|
+|Set result to a variable||result|

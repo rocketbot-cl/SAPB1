@@ -196,7 +196,6 @@ if module == "get_value":
     row = GetParams("row")
     column = GetParams("column")    
     res = GetParams("res")
-
     try:
         if not row or not column:
             form = sap_b1.get_form(form_id)
@@ -246,7 +245,6 @@ if module == "pop_up":
     item_id = GetParams("item_id")
     try:
         smbForm = sap_b1.sbo_application.Forms.ActiveForm
-
         smbForm.Items.Item(str(item_id)).Click()
     except Exception as e:
         SetVar(res, False)
