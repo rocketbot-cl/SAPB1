@@ -3,7 +3,7 @@ try:
     from threading import Thread
     from queue import Queue, Empty
 except ImportError:
-    from Queue import Queue, Empty  
+    from Queue import Queue, Empty
 
 def click_items(*arr_item, click_type = 0):
     try:
@@ -12,7 +12,6 @@ def click_items(*arr_item, click_type = 0):
         
     except:
         PrintException()
-
 
 class SAP_B1:
     def __init__(self):
@@ -24,8 +23,8 @@ class SAP_B1:
         self.sbo_gui_api.Connect(self.connection_string)
         self.sbo_application = self.sbo_gui_api.GetApplication(-1)
 
-    def login(self, user, pwd, society=None):
-        
+    def login_1(self, user, pwd, society=None):
+        # This is for the case that user and pass is necessary
         try:
             form = self.get_form("821")
             form.Items.Item("4").Click(0)
@@ -34,21 +33,75 @@ class SAP_B1:
             self.sbo_application.SendKeys(pwd)
         except:
             pass
-        print("society")
         if society:
-            print("queue")
+            print("society_1")
             q = Queue()
-            # t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
-            # t.start()
+            t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
+            t.start()
             form = self.get_form("820")
             form.Items.Item("1470000132").Click(0)
-            # self.sbo_application.SendKeys(society)
-            # form.Items.Item("19").Click(0)
-            # self.sbo_application.SendKeys(user)
-            # form.Items.Item("20").Click(0)
-            # self.sbo_application.SendKeys(pwd)
-        print("click")
+            self.sbo_application.SendKeys(society)
+            form.Items.Item("19").Click(0)
+            self.sbo_application.SendKeys(user)
+            form.Items.Item("20").Click(0)
+            self.sbo_application.SendKeys(pwd)
+
+        # for form_ in self.sbo_application.Forms:
+        #     print(form_.Title)
+        #     print(form_.UniqueID)
+        #     if form_.Title == 'Mensaje sistema':
+        #         break
+        # for item in form_.Items:
+        #     print(f'Type {item.Type}')
+        #     print(f'UID {item.UniqueID}')
+        #     try:
+        #         print(f'Static {item.Specific.Caption}')
+        #     except:
+        #         pass
+        #     try:
+        #         print(f'EditText {item.Specific.String}')
+        #     except:
+        #         pass
+        #     try:
+        #         print(f'CB {item.Specific.ValidValues}')
+        #     except:
+        #         pass
+
         form.Items.Item("1").Click(0)
+
+    def login_2(self, society=None):
+        # This is for the case in which there is not necessary to login
+        print("society_2")
+        form_ = self.get_form("1570000001")
+        matrix = form_.Items.Item('1570000003').Specific
+        target = matrix.Columns.Item(str('1570000001')).Cells.Item(int(society))
+        target.Click()
+        q = Queue()
+        t = Thread(target=click_items, args=([form_.Items.Item('1570000006')]), daemon=False)
+        t.start()
+    
+    """Lines kept for future tests"""
+        # for form_ in self.sbo_application.Forms:
+        #     print(form_.Title)
+        #     print(form_.UniqueID)
+        #     if form_.Title == 'Mensaje sistema':
+        #         break
+        # for item in form_.Items:
+        #     print(f'Type {item.Type}')
+        #     print(f'UID {item.UniqueID}')
+        #     try:
+        #         print(f'Static {item.Specific.Caption}')
+        #     except:
+        #         pass
+        #     try:
+        #         print(f'EditText {item.Specific.String}')
+        #     except:
+        #         pass
+        #     try:
+        #         print(f'CB {item.Specific.ValidValues}')
+        #     except:
+        #         pass
+        #     item.Click()
 
     def get_form(self, id_form):
         return self.sbo_application.Forms.GetForm(str(id_form), 0)
