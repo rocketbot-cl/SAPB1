@@ -392,9 +392,9 @@ if module == 'matrix':
                     row_['Row'] = row_n
                     row_cols = []
                     try:
-                        columns = rows[0]['Columns']['Column']
+                        columns = row[0]['Columns']['Column']
                     except:
-                        columns = rows['Columns']['Column']
+                        columns = row['Columns']['Column']
                     # Columns List
                     if isinstance(columns, list):
                         for col in columns:
