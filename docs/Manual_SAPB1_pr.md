@@ -18,79 +18,91 @@ Para podermos executar os comandos, devemos ter em mente que os objectos que enc
 
 ## Descrição do comando
 
-### Conectar ao SAP B1
+### Conecte-se ao SAP B1
   
-Conectar ao SAP B1
+Conecte-se ao SAP B1. O aplicativo deve estar aberto no momento de executar o comando.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Atribuir resultado a uma variável||result|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|res|
 
-### Iniciar sessão no SAP B1
+### Entrar no SAP B1
   
-Iniciar sessão no SAP B1
+Entrar no SAP B1
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Utilizador||manager|
+|Usuário||manager|
 |Senha||password|
-|Nome da base de dados||DBSociety01|
-|Empresa||2|
+|Nome do banco de dados (Opcional)||DBSociety01|
+|Sociedade (Opcional)||2|
 
 ### Click
   
-Clique sobre um item
+Faça um clique em um item
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Formulário||form|
+|Forma||form|
 |Item||item|
 |Linha||row|
 |Coluna||column|
-|Tipo|||
+|Modelo|||
 
-### Activar item do menu
+### Selecione
   
-Activar item do menu
+Selecione um item
+|Parâmetros|Descrição|exemplo|
+| --- | --- | --- |
+|Forma||form|
+|Item||item|
+|Linha||row|
+|Coluna||column|
+|Type|||
+|Parâmetro||Value/Index|
+
+### Ativar item de menu
+  
+Ativar item de menu
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Item do menu||3392|
 
-### Enviar texto
+### Enviar texto ou tecla
   
-Enviar texto para uma entrada de texto
+Enviar texto ou tecla a uma entrada de texto. Se deixar em branco o texto, a tecla será enviada.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Texto||Hello World!|
+|Enviar tecla||ENTER|
 
 ### Obter texto
   
 Obtém o texto de um item
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Formulário||form|
+|Forma||form|
 |Item||item|
 |Linha||row|
 |Coluna||column|
-|Atribuir resultado a uma variável||result|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|result|
 
-### Clique na janela pop-up
+### Clique no pop-up
   
 Clique na janela pop-up
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Item||item|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|item|
 
-### Obter dados a partir de formulários e menus visíveis
+### Obtenha formulários visíveis e dados de menus
   
-Obter dados a partir de formulários e menus. Os dados serão sobre os formulários e menus visíveis no momento da 
-execução.
+Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Atribuir resultado a uma variável||result|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|data|
 
 ### Obter dados de matriz visíveis
   
-Obter dados matriciais. A Matriz seleccionada deve ser visível no momento da execução.
+Obter dados de matriz. A matriz deve estar visível no momento da execução.
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Formulário||form|
-|item||item|
-|Atribuir resultado a uma variável||result|
+|Forma||form|
+|Item||item|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|result|

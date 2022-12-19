@@ -17,31 +17,34 @@ Para poder ejecutar los comandos deberemos tener en cuenta que los objetos que n
 ## Overview
 
 1. Conectar a SAP B1  
-Conectar a SAP B1
+Conectar a SAP B1. La aplicación debe estar abierta al momento de ejecutar el comando.
 
-2. Iniciar sesion en SAP B1  
-Inicia sesion a SAP B1
+2. Iniciar sesión en SAP B1  
+Iniciar sesión en SAP B1
 
 3. Click  
 Realiza un click en un item
 
-4. Activar item de menu  
+4. Seleccionar  
+Seleccionar un item
+
+5. Activar item de menu  
 Activar item de menu
 
-5. Enviar texto  
-Enviar texto a una entrada de texto
+6. Enviar texto o tecla  
+Enviar texto o tecla a una entrada de texto. Si se deja vacío el texto, se enviará la tecla.
 
-6. Obtener texto  
-Obtiene el texto de un item
+7. Obtener texto  
+Obtiene el texto de un ítem
 
-7. Click en ventana emergente  
+8. Click en ventana emergente  
 Click en ventana emergente
 
-8. Obtener datos de formularios y menus visibles  
+9. Obtener datos de formularios y menus visibles  
 Obtener datos de formularios y menus. Los dato seran sobre ls formularios y menus visibles al momento de ejecución.
 
-9. Obtener datos de matriz visible  
-Obtener datos de matriz. La Matriz seleccionada debe encontrarse visible al momento de ejecución.  
+10. Obtener datos de matriz visible  
+Obtener datos de matriz. La Matriz debe encontrarse visible al momento de ejecución.  
 
 
 
