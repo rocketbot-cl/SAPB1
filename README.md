@@ -17,31 +17,34 @@ To be able to execute the commands we must take into account that the objects th
 ## Overview
 
 1. Connect to SAP B1  
-Connect to SAP B1
+Connect to SAP B1. The application must be open at the time of executing the command.
 
 2. Login to SAP B1  
 Login to SAP B1
 
 3. Click  
-Do a click in an item
+Do a click on an item
 
-4. Activate menu item  
+4. Select  
+Select an item
+
+5. Activate menu item  
 Activate menu item
 
-5. Send text  
-Send text to an input
+6. Send text or key  
+Send text or key to a text input. If the text is empty, the key will be sent.
 
-6. Get text  
+7. Get text  
 Get text from an item
 
-7. Click in pop up  
-Click in pop up
+8. Click on pop up  
+Click on pop up window
 
-8. Get visible forms and menus data  
-Get data of forms and menus. The data will be about visible forms and menus at the momento of the execution.
+9. Get visible forms and menus data  
+Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
 
-9. Get visible matrix data  
-Get matrix data. The selected Matrix must be visible at the moment of execution.  
+10. Get visible matrix data  
+Get matrix data. Matrix must be visible at the moment of execution.  
 
 
 

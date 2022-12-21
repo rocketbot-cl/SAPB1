@@ -6,12 +6,18 @@ except ImportError:
     from Queue import Queue, Empty
 
 def click_items(*arr_item, click_type = 0):
-    try:
-        for item in arr_item:
-            item.Click(click_type)
-        
-    except:
-        PrintException()
+
+    for item in arr_item:
+        item.Click(click_type)    
+
+def select_items(*arr_item, mt, value):
+    for item in arr_item:
+        item.Select(SearchKey=mt, Index=value)
+        # if mt in [0, 1]:
+        #     item.Select(SearchKey=mt, Index=value)
+        # else:
+        #     item.Select(SearchKey=mt, Index=value)
+
 
 class SAP_B1:
     def __init__(self):
@@ -24,7 +30,7 @@ class SAP_B1:
         self.sbo_application = self.sbo_gui_api.GetApplication(-1)
 
     def login_1(self, user, pwd, society=None):
-        # This is for the case that user and pass is necessary
+        # This is for the case that 
         try:
             form = self.get_form("821")
             form.Items.Item("4").Click(0)
@@ -123,6 +129,16 @@ class SAP_B1:
         t = Thread(target=click_items, args=(item, click_type), daemon=False)
         t.start()
     
+    def do_select_grid_item(self, item, row, column, method, val):
+        q = Queue()
+        t = Thread(target=select_items, args=(item.Columns.Item(str(column)).Cells.Item(int(row)).Specific, ), kwargs={'mt': method, 'value': val}, daemon=False)
+        t.start()
+    
+    def do_select_item(self, item, method, val):
+        q = Queue()
+        t = Thread(target=select_items, args=(item, ), kwargs={'mt': method, 'value': val}, daemon=False)
+        t.start()
+
     def activate_menu(self, id_menu):
         self.sbo_application.ActivateMenuItem(str(id_menu))
     
@@ -151,20 +167,4 @@ if __name__ == '__main__':
     #item_valor = data_string.Columns.Item(str("V_2")).Cells.Item(int(1))
     
 
-        # 1 BOTON OK
-        # 2 Finalizar
-        # 4 usuario
-        # 5 pwd
 
-
-
-        #for item in items:
-        #    print(item.UniqueID)
-    #form = sap_b1.get_form("184")
-    #sap_b1.get_item(form, "22").Click(0)
-    #sap_b1.sbo_application.SendKeys("hola")
-    #form.Items.Item("1").Click(1)
-
-    #item = sap_b1.get_specific_item(form, "6")
-    #sap_b1.do_click_grid_item(item, "7", 3)
-    #sap_b1.do_click_grid_item(item, "7", 4)

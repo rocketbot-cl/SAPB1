@@ -153,15 +153,37 @@ if module == "click":
     column = GetParams("column")
     click_type = GetParams("click_type")
     try:
+        form = sap_b1.get_form(form_id)
         if not row or not column:
-            form = sap_b1.get_form(form_id)
             # sap_b1.get_item(form, item_id).Click(int(click_type))
             item = sap_b1.get_item(form, item_id)
             sap_b1.do_click_item(item, click_type)
         else:
-            form = sap_b1.get_form(form_id)
             item = sap_b1.get_specific_item(form, item_id)
             sap_b1.do_click_grid_item(item, row, column, click_type)
+    except Exception as e:
+        SetVar(res, False)
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "select":
+    form_id = GetParams("form_id")
+    item_id = GetParams("item_id")
+    row = GetParams("row")
+    column = GetParams("column")
+    method_type = GetParams("type")
+    value = GetParams("value")
+
+    try:
+        form = sap_b1.get_form(form_id)
+        if not row or not column:
+            item = sap_b1.get_specific_item(form, item_id)
+            sap_b1.do_select_item(item, method_type, value)
+        else:
+            item = sap_b1.get_specific_item(form, item_id)
+            sap_b1.do_select_grid_item(item, row, column, method_type, value)
+
     except Exception as e:
         SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
@@ -182,8 +204,12 @@ if module == "activate_menu":
 
 if module == "send_text":
     text = GetParams("text")
+    key_ = GetParams("key")
     try:
-        sap_b1.sbo_application.SendKeys(text)
+        if text:
+            sap_b1.sbo_application.SendKeys(text)
+        else:
+            sap_b1.sbo_application.SendKeys(key_)
     except Exception as e:
         SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
@@ -362,7 +388,6 @@ if module == 'matrix':
         # Obtain list o columns and list of rows within the matix
         columns = dict_['Matrix']['ColumnsInfo']['ColumnInfo']
         rows = dict_['Matrix']['Rows']['Row']
-        print(rows)
         # List to hold the ID of visible columns
         visible_columns = []
         # Initialize a counter which keep track of rows ID
@@ -392,9 +417,9 @@ if module == 'matrix':
                     row_['Row'] = row_n
                     row_cols = []
                     try:
-                        columns = rows[0]['Columns']['Column']
+                        columns = row[0]['Columns']['Column']
                     except:
-                        columns = rows['Columns']['Column']
+                        columns = row['Columns']['Column']
                     # Columns List
                     if isinstance(columns, list):
                         for col in columns:

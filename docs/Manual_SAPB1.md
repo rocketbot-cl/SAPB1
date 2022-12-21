@@ -20,10 +20,10 @@ To be able to execute the commands we must take into account that the objects th
 
 ### Connect to SAP B1
   
-Connect to SAP B1
+Connect to SAP B1. The application must be open at the time of executing the command.
 |Parameters|Description|example|
 | --- | --- | --- |
-|Set result to a variable||result|
+|Set result to a variable|Name of the variable where the result will be stored|res|
 
 ### Login to SAP B1
   
@@ -32,12 +32,12 @@ Login to SAP B1
 | --- | --- | --- |
 |User||manager|
 |Password||password|
-|Database name||DBSociety01|
-|Society||2|
+|Database name (Optional)||DBSociety01|
+|Society (Optional)||2|
 
 ### Click
   
-Do a click in an item
+Do a click on an item
 |Parameters|Description|example|
 | --- | --- | --- |
 |Form||form|
@@ -46,6 +46,18 @@ Do a click in an item
 |Column||column|
 |Type|||
 
+### Select
+  
+Select an item
+|Parameters|Description|example|
+| --- | --- | --- |
+|Form||form|
+|Item||item|
+|Row||row|
+|Column||column|
+|Type|||
+|Parameter||Value/Index|
+
 ### Activate menu item
   
 Activate menu item
@@ -53,12 +65,13 @@ Activate menu item
 | --- | --- | --- |
 |Menu item||3392|
 
-### Send text
+### Send text or key
   
-Send text to an input
+Send text or key to a text input. If the text is empty, the key will be sent.
 |Parameters|Description|example|
 | --- | --- | --- |
 |Text||Hello World!|
+|Send key||ENTER|
 
 ### Get text
   
@@ -69,27 +82,27 @@ Get text from an item
 |Item||item|
 |Row||row|
 |Column||column|
-|Set result to a variable||result|
+|Set result to a variable|Name of the variable where the result will be stored|result|
 
-### Click in pop up
+### Click on pop up
   
-Click in pop up
+Click on pop up window
 |Parameters|Description|example|
 | --- | --- | --- |
-|Item||item|
+|Set result to a variable|Name of the variable where the result will be stored|item|
 
 ### Get visible forms and menus data
   
-Get data of forms and menus. The data will be about visible forms and menus at the momento of the execution.
+Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
 |Parameters|Description|example|
 | --- | --- | --- |
-|Set result to a variable||result|
+|Set result to a variable|Name of the variable where the result will be stored|data|
 
 ### Get visible matrix data
   
-Get matrix data. The selected Matrix must be visible at the moment of execution.
+Get matrix data. Matrix must be visible at the moment of execution.
 |Parameters|Description|example|
 | --- | --- | --- |
 |Form||form|
 |Item||item|
-|Set result to a variable||result|
+|Set result to a variable|Name of the variable where the result will be stored|result|
