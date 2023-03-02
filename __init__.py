@@ -23,7 +23,8 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
     pip install <package> -t .
 
 """
-
+import os
+import sys
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + "modules" + os.sep + "SAPB1" + os.sep + "libs" + os.sep
 if cur_path not in sys.path:
