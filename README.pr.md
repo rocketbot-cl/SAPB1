@@ -4,17 +4,19 @@
 
 # SAPB1
   
-Módulo para automatizar o SAP Business One.  
+Com este módulo você pode automatizar SAP Business One.  
+
+*Read this in other languages: [English](README.md), [Português](README.pr.md), [Español](README.es.md)*
 
 ## Como instalar este módulo
   
-__Baixe__ e __instale__ o conteúdo na pasta 'modules' no caminho do Rocketbot  
+Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
+1. Manual: __Baixe__ o arquivo .zip e descompacte-o na pasta módulos. O nome da pasta deve ser o mesmo do módulo e dentro dela devem ter os seguintes arquivos e pastas: \__init__.py, package.json, docs, example e libs. Se você tiver o aplicativo aberto, atualize seu navegador para poder usar o novo módulo.
+2. Automático: Ao entrar no Rocketbot Studio na margem direita você encontrará a seção **Addons**, selecione **Install Mods**, procure o módulo desejado e aperte instalar.  
 
-## Como usar este módulo
-
-Para podermos executar os comandos, devemos ter em mente que os objectos que encontramos no SAP B1, sejam eles inputs, botões ou menus, são diferenciados por IDs, e alguns deles são encontrados dentro de linhas e colunas. Para conhecer estes dados, devemos activar a opção "Informação do sistema" encontrada no menu Exibir, ou premir a combinação de teclas Ctrl + Shift + I. Depois, no canto inferior esquerdo, podemos ver os dados do objecto. É importante ter isto em conta ao automatizar, pois será necessário ter o ID do Formulário e o ID do Item, bem como a coluna e linha, se aplicável.
 
 ## Overview
+
 
 1. Conecte-se ao SAP B1  
 Conecte-se ao SAP B1. O aplicativo deve estar aberto no momento de executar o comando.

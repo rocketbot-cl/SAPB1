@@ -4,17 +4,21 @@
 
 # SAPB1
   
-Module to automate SAP Business One.  
+With this module you can automate SAP Business One.  
+
+*Read this in other languages: [English](Manual_SAPB1.md), [Português](Manual_SAPB1.pr.md), [Español](Manual_SAPB1.es.md)*
   
 ![banner](imgs/Banner_SAPB1.png)
-
 ## How to install this module
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
 
 ## How to use this module
 
 To be able to execute the commands we must take into account that the objects that we find in SAP B1, either an input, button or menu are differentiated by IDs, and some of them are located within rows and columns. In order to know this data, we must activate the "System information" option found in the View menu, or press the Ctrl + Shift + I key combination. Then in the lower left corner we will be able to see the object data. It is important to take this into account when automating since it will be necessary to have the Form ID and Item ID, as well as the column and row, if applicable.
+
 
 ## Description of the commands
 
