@@ -7,7 +7,7 @@
     "pr": "Com este módulo você pode automatizar SAP Business One."
   },
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "3.2.1",
+  "version": "3.2.5",
   "license": "MIT",
   "homepage": "http://rocketbot.com/",
   "linux": false,
@@ -279,6 +279,27 @@
               }
             ],
             "id": "click_type",
+            "css": "col-md-6"
+          },
+          {
+            "type": "checkbox",
+            "placeholder": "checkbox",
+            "title": {
+              "es": "Click en buscador",
+              "en": "Click on picker",
+              "pr": "Clique no seletor"
+            },
+            "description": {
+              "es": "Realizar click en el buscador del objeto, aplica para el caso de objetos Edición de Texto",
+              "en": "Click on the object search engine, applicable in the case of Text Edit objects",
+              "pr": "Clique no mecanismo de busca de objetos, aplicável no caso de objetos do Edição de Texto"
+            },
+            "help": {
+              "es": "Aplica para inputs de texto que tengan opción de buscador",
+              "en": "Applies to text inputs that have search option",
+              "pr": "Aplica-se a entradas de texto que possuem opção de pesquisa"
+            },
+            "id": "specific",
             "css": "col-md-6"
           }
         ]

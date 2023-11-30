@@ -52,8 +52,11 @@ types = {
         99: 'Folder',
         113: 'Combo Box',
         116: 'Linked Button',
-        118: 'EditText',
-        127: 'Matrix'
+        118: 'Edit Text',
+        121: 'CheckBox',
+        122: 'Option Button',
+        127: 'Matrix',
+        128: 'Grid'
     }
 
 if module == "connect":
@@ -99,53 +102,6 @@ if module == "login":
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
-    
-    
-    # if society:
-    #     print("queue")
-    #     for form in self.sbo_application.Forms:
-    #         print(form.Title)
-    #         print(form.Type)
-    #         print(form.UniqueID)
-    #         print(form.Items)
-    #     #q = Queue()
-    #     #t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
-    #     #t.start()
-    #     form_ = self.get_form("820")
-    #     for item in form_.Items:
-    #         # print(f'Desc. {item.Description}')
-    #         print(f'Type {item.Type}')
-    #         print(f'UID {item.UniqueID}')
-    #         print(f'UID {item.FromPane}')
-    #         print(f'UID {item.Width}')
-            
-    #         try:
-    #             print(f'Static {item.Specific.Caption}')
-    #         except:
-    #             pass
-    #         try:
-    #             print(f'EditText {item.Specific.String}')
-    #         except:
-    #             pass
-    #         try:
-    #             print(f'CB {item.Specific.ValidValues}')
-    #         except:
-    #             pass
-            
-
-    #         print('-------')
-    #     #form.Items.Item("Empresa Bagno SPA").Click(0)
-    #     print('ok')
-    #     #self.sbo_application.SendKeys(society)
-    #     #form.Items.Item("19").Click(0)
-    #     #self.sbo_application.SendKeys(user)
-    #     #form.Items.Item("20").Click(0)
-    #     #self.sbo_application.SendKeys(pwd)
-
-
-    # def get_form(self, id_form):
-    #     return self.sbo_application.Forms.GetForm(str(id_form), 0)
-
 
 if module == "click":
     form_id = GetParams("form_id")
@@ -153,17 +109,23 @@ if module == "click":
     row = GetParams("row")
     column = GetParams("column")
     click_type = GetParams("click_type")
+    specific = GetParams("specific")
     try:
         form = sap_b1.get_form(form_id)
+        form.Select()
+        item = sap_b1.get_item(form, item_id)
         if not row or not column:
-            # sap_b1.get_item(form, item_id).Click(int(click_type))
-            item = sap_b1.get_item(form, item_id)
-            sap_b1.do_click_item(item, click_type)
+            if specific and eval(specific) and item.Type in [16, 118]:
+                item.Specific.ClickPicker() # Edit Text (OPTIONAL) Specific click
+            else:
+                sap_b1.do_click_item(item, click_type)
         else:
-            item = sap_b1.get_specific_item(form, item_id)
-            sap_b1.do_click_grid_item(item, row, column, click_type)
+            item_s = sap_b1.get_specific_item(form, item_id)
+            if item.Type == 128:
+                item_s.Columns.Item(column).Click(int(row)) # Grid cell Specific click
+            else:
+                sap_b1.do_click_grid_item(item_s, row, column, click_type)
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -178,15 +140,14 @@ if module == "select":
 
     try:
         form = sap_b1.get_form(form_id)
+        form.Select()
+        item = sap_b1.get_specific_item(form, item_id)
         if not row or not column:
-            item = sap_b1.get_specific_item(form, item_id)
             sap_b1.do_select_item(item, method_type, value)
         else:
-            item = sap_b1.get_specific_item(form, item_id)
             sap_b1.do_select_grid_item(item, row, column, method_type, value)
 
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -198,7 +159,6 @@ if module == "activate_menu":
         t = Thread(target=sap_b1.activate_menu, args=(menu_id,))
         t.start()
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -212,7 +172,6 @@ if module == "send_text":
         else:
             sap_b1.sbo_application.SendKeys(key_)
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -224,20 +183,19 @@ if module == "get_value":
     column = GetParams("column")    
     res = GetParams("res")
     try:
+        form = sap_b1.get_form(form_id)
+        form.Select()
+        item = sap_b1.get_item(form, str(item_id))
+        item_type = item.Type
         if not row or not column:
-            form = sap_b1.get_form(form_id)
-            item = sap_b1.get_item(form, str(item_id))
-            item_type = item.Type
             try:
-                if item_type in [4, 8, 99]:
+                if item_type in [4, 8, 99, 121, 122, 130]:
                     value = item.Specific.Caption
                 elif item_type in [16, 113]:
                     try:
                         value = item.Specific.Value
-                        print(value)
                     except:
                         value = item.Specific.String
-                        print(value)
                 elif item_type == 116:
                     try:
                         value = item.Specific.Value
@@ -257,10 +215,12 @@ if module == "get_value":
             
             SetVar(res, value)
         else:
-            form = sap_b1.get_form(str(form_id))
-            data_string = sap_b1.get_item(form, str(item_id)).Specific
-            item_valor = data_string.Columns.Item(str(column)).Cells.Item(int(row))
-            value = item_valor.Specific.Value
+            data_string = item.Specific
+            if item_type == 128:
+                value = data_string.DataTable.GetValue(str(column),int(row))
+            else:
+                item_valor = data_string.Columns.Item(str(column)).Cells.Item(int(row))
+                value = item_valor.Specific.Value
             SetVar(res, value)
     except Exception as e:
         SetVar(res, False)
@@ -274,7 +234,6 @@ if module == "pop_up":
         smbForm = sap_b1.sbo_application.Forms.ActiveForm
         smbForm.Items.Item(str(item_id)).Click()
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -291,7 +250,8 @@ if module == 'data':
             formDict = {}
             if form.Visible == True:
                 formDict['FormTitle'] = form.Title
-                formDict['FormID'] = form.Type
+                formDict['FormID_1'] = form.UniqueID
+                formDict['FormID_2'] = form.Type
                 formDict['Items'] = []
                 for item in form.Items:
                     itemDict = {}
@@ -306,7 +266,7 @@ if module == 'data':
                                 'Height': item.Height
                             }
                             
-                            if item_type in [4, 8, 99, 130]:
+                            if item_type in [4, 8, 99, 121, 122, 130]:
                                 itemDict['Caption'] = item.Specific.Caption
                             elif item_type in [16, 113]:
                                 try:
@@ -325,10 +285,20 @@ if module == 'data':
                                     itemDict['Caption'] = item.Specific.String
                             elif item_type == 127:
                                 itemDict['Caption'] = item.Description
+                            elif item_type == 128:
+                                itemDict['Caption'] = []                                
                             else:
-                                raise Exeption('Type not found.')                            
-
-                        except:
+                                raise Exception('Type not found.')                            
+                            
+                            if item_type == 121:
+                                itemDict['Checked'] = item.Specific.Checked
+                            if item_type == 122:
+                                itemDict['Selected'] = item.Specific.Selected
+                            if item_type == 128:
+                                itemDict['Columns'] = [col.Name for col in item.Specific.DataTable.Columns]
+                            
+                        except Exception as e:
+                            print(e)
                             itemDict['UID'] = item.UniqueID
                             itemDict['Type'] = item.Type
                             itemDict['Caption'] = item.Description
@@ -375,52 +345,88 @@ if module == 'matrix':
     try:
         form = sap_b1.get_form(str(form_id))
         item = sap_b1.get_item(form, str(item_id))
-        # Obtain XML versión of the matrix
-        matrix_ = item.Specific.SerializeAsXML(0)
-        # Converts it into a dict object
-        xml_ = '<?xml version="1.0" encoding="UTF-16" ?>' + matrix_
-        dict_ = json.loads(json.dumps(xmltodict.parse(xml_)))
         # Createsdict object which will hold the matix data
-        matrixDict = {}
+        matrixDict = {}  
         matrixDict['FormTitle'] = form.Title
         matrixDict['FormID'] = form.Type
         matrixDict['ItemUID'] = item.UniqueID
-        matrixDict['Matix'] = []
-        # Obtain list o columns and list of rows within the matix
-        columns = dict_['Matrix']['ColumnsInfo']['ColumnInfo']
-        rows = dict_['Matrix']['Rows']['Row']
-        # List to hold the ID of visible columns
-        visible_columns = []
-        # Initialize a counter which keep track of rows ID
-        row_n = 0
-        # Gets Row Zero data, which is the matix titles
-        row_ = {}
-        row_['Row'] = row_n
-        row_['Columns Title'] = []
-        for col in columns:
-            col_ = {}
-            if col['Visible'] == '1':
-                visible_columns.append(col['UniqueID'])
-                col_['ID'] = col['UniqueID']
-                col_['Title'] = col['Title']
-                row_['Columns Title'].append(col_)
+        
+        if item.Type == 128:
+            xml_ = item.Specific.DataTable.SerializeAsXML(0)
+            matrixDict['DataTable'] = []
+            dict_ = json.loads(json.dumps(xmltodict.parse(xml_)))
+            SetVar(res, dict_)
+        else:
+            # Obtain XML versión of the matrix
+            matrix_ = item.Specific.SerializeAsXML(0)
+            # Converts it into a dict object
+            xml_ = '<?xml version="1.0" encoding="UTF-16" ?>' + matrix_
+            matrixDict['Matix'] = []
+            dict_ = json.loads(json.dumps(xmltodict.parse(xml_)))
+            
+            # Obtain list o columns and list of rows within the matix
+            columns = dict_['Matrix']['ColumnsInfo']['ColumnInfo']
+            rows = dict_['Matrix']['Rows']['Row']
+            # List to hold the ID of visible columns
+            visible_columns = []
+            # Initialize a counter which keep track of rows ID
+            row_n = 0
+            # Gets Row Zero data, which is the matix titles
+            row_ = {}
+            row_['Row'] = row_n
+            row_['Columns Title'] = []
+            for col in columns:
+                col_ = {}
+                if col['Visible'] == '1':
+                    visible_columns.append(col['UniqueID'])
+                    col_['ID'] = col['UniqueID']
+                    col_['Title'] = col['Title']
+                    row_['Columns Title'].append(col_)
 
-        matrixDict['Matix'].append(row_)
+            matrixDict['Matix'].append(row_)
 
-        # Gets rest of the Rows data, it is divided in two cases a list of rows or a unique row
-        # It is structured exactly the same for the Columns 
-        # Rows List
-        if isinstance(rows, list):
-            for row in rows:
+            # Gets rest of the Rows data, it is divided in two cases a list of rows or a unique row
+            # It is structured exactly the same for the Columns 
+            # Rows List
+            if isinstance(rows, list):
+                for row in rows:
+                    row_ = {}
+                    row_n += 1
+                    if row['Visible'] == '1':
+                        row_['Row'] = row_n
+                        row_cols = []
+                        try:
+                            columns = row[0]['Columns']['Column']
+                        except:
+                            columns = row['Columns']['Column']
+                        # Columns List
+                        if isinstance(columns, list):
+                            for col in columns:
+                                if col['ID'] not in visible_columns:
+                                    continue
+                                else:
+                                    r_col = {}
+                                    r_col['Column'] = col['ID']
+                                    r_col['Value'] = col['Value']
+                                    row_cols.append(r_col)
+                            row_['Columns'] = row_cols
+                        # Unique Column
+                        else:
+                            r_col = {}
+                            r_col['Column'] = columns['ID']
+                            r_col['Value'] = columns['Value']
+                            row_['Columns'] = r_col         
+                    if row_ in matrixDict['Matix']:
+                        continue
+                    else:
+                        matrixDict['Matix'].append(row_)
+            # Unique Row
+            else:
                 row_ = {}
-                row_n += 1
-                if row['Visible'] == '1':
-                    row_['Row'] = row_n
+                if rows['Visible'] == '1':
+                    row_['Row'] = 1
                     row_cols = []
-                    try:
-                        columns = row[0]['Columns']['Column']
-                    except:
-                        columns = row['Columns']['Column']
+                    columns = rows['Columns']['Column']
                     # Columns List
                     if isinstance(columns, list):
                         for col in columns:
@@ -438,38 +444,10 @@ if module == 'matrix':
                         r_col['Column'] = columns['ID']
                         r_col['Value'] = columns['Value']
                         row_['Columns'] = r_col         
-                if row_ in matrixDict['Matix']:
-                    continue
-                else:
+                    
                     matrixDict['Matix'].append(row_)
-        # Unique Row
-        else:
-            row_ = {}
-            if rows['Visible'] == '1':
-                row_['Row'] = 1
-                row_cols = []
-                columns = rows['Columns']['Column']
-                # Columns List
-                if isinstance(columns, list):
-                    for col in columns:
-                        if col['ID'] not in visible_columns:
-                            continue
-                        else:
-                            r_col = {}
-                            r_col['Column'] = col['ID']
-                            r_col['Value'] = col['Value']
-                            row_cols.append(r_col)
-                    row_['Columns'] = row_cols
-                # Unique Column
-                else:
-                    r_col = {}
-                    r_col['Column'] = columns['ID']
-                    r_col['Value'] = columns['Value']
-                    row_['Columns'] = r_col         
-                
-                matrixDict['Matix'].append(row_)
 
-        SetVar(res, matrixDict)
+            SetVar(res, matrixDict)
     except Exception as e:
         SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
@@ -484,6 +462,7 @@ if module == "set_focus":
     try:
         if not row or not column:
             form = sap_b1.get_form(str(form_id))
+            form.Select()
             item = sap_b1.get_item(form, str(item_id))
             id_ = item.UniqueID
             print(id_)
@@ -492,15 +471,14 @@ if module == "set_focus":
             item_spec = item.Specific
         else:
             form = sap_b1.get_form(str(form_id))
+            form.Select()
             data_string = sap_b1.get_item(form, str(item_id)).Specific
             item_valor = data_string.Columns.Item(str(column)).Cells.Item(int(row))
             id_ = item.UniqueID
-            print(id_)
             form.ActiveItem = id_
             active_item = form.Items.Item(id_)
             item_spec = item.Specific
     except Exception as e:
-        SetVar(res, False)
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e

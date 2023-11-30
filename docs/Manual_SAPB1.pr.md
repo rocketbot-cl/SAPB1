@@ -49,6 +49,7 @@ Faça um clique em um item
 |Linha||row|
 |Coluna||column|
 |Modelo|||
+|Clique no seletor|Clique no mecanismo de busca de objetos, aplicável no caso de objetos do Edição de Texto|checkbox|
 
 ### Selecione
   

@@ -49,6 +49,7 @@ Do a click on an item
 |Row||row|
 |Column||column|
 |Type|||
+|Click on picker|Click on the object search engine, applicable in the case of Text Edit objects|checkbox|
 
 ### Select
   
