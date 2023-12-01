@@ -4,41 +4,49 @@
 
 # SAPB1
   
-Module to automate actions in SAP Business One. Do clicks, get text values, set text in inputs fields and many more.  
+With this module you can automate SAP Business One.  
+
+*Read this in other languages: [English](README.md), [Português](README.pr.md), [Español](README.es.md)*
 
 ## How to install this module
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
-
-## How to use this module
-
-To be able to execute the commands we must take into account that the objects that we find in SAP B1, either an input, button or menu are differentiated by IDs, and some of them are inside rows and columns. In order to know this data, we will have to activate the option "System information" that is in the visualize menu, or press the combination of keys Ctrl + Shift + I. Then in the lower left corner we will be able to see the properties of the object. We must take this into account when automating since it is necessary to know the Item ID and Form ID, as well as the column and row if necessary.
-
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
 
 
 ## Overview
 
 
 1. Connect to SAP B1  
-Connect to an SAP B1 instance
+Connect to SAP B1. The application must be open at the time of executing the command.
 
 2. Login to SAP B1  
-Log in to the SAP B1 instance using username and password
+Login to SAP B1
 
 3. Click  
-Click on an item, taking into account the form in which it is located and ID
+Do a click on an item
 
-4. Activate menu item  
-Activate menu item by ID
+4. Select  
+Select an item
 
-5. Send text  
-Send text to an input text
+5. Activate menu item  
+Activate menu item
 
-6. Get text  
-Get text from an item from a input field
+6. Send text or key  
+Send text or key to a text input. If the text is empty, the key will be sent.
 
-7. Select combobox  
-Select an option from a combobox  
+7. Get text  
+Get text from an item
+
+8. Click on pop up  
+Click on pop up window
+
+9. Get visible forms and menus data  
+Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
+
+10. Get visible matrix data  
+Get matrix data. Matrix must be visible at the moment of execution.  
 
 
 
