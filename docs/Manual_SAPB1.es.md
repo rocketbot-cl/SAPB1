@@ -6,6 +6,8 @@
   
 Con este módulo puedes automatizar SAP Business One.  
 
+*Read this in other languages: [English](Manual_SAPB1.md), [Português](Manual_SAPB1.pr.md), [Español](Manual_SAPB1.es.md)*
+  
 ![banner](imgs/Banner_SAPB1.png)
 ## Como instalar este módulo
   
