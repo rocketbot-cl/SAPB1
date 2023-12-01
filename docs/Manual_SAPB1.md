@@ -1,7 +1,3 @@
-
-
-
-
 # SAPB1
   
 With this module you can automate SAP Business One.  
@@ -111,3 +107,4 @@ Get matrix data. Matrix must be visible at the moment of execution.
 |Form||form|
 |Item||item|
 |Set result to a variable|Name of the variable where the result will be stored|result|
+
