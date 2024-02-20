@@ -38,6 +38,18 @@ Login to SAP B1
 |Password||password|
 |Database name (Optional)||DBSociety01|
 |Society (Optional)||2|
+|Synchronous mode|Connect synchronously|Checkbox|
+|Asynchronous mode|Connect asynchronously|Checkbox|
+
+### Wait
+  
+Wait for an item
+|Parameters|Description|example|
+| --- | --- | --- |
+|Form||form|
+|Item||item|
+|Timeout (Seconds - Optional)||5|
+|Set result to a variable|Name of the variable where the result will be stored|result|
 
 ### Click
   

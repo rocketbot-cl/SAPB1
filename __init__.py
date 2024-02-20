@@ -78,7 +78,6 @@ if module == "connect":
 
         sap_b1 = SAP_B1()
         sap_b1.connect_app()
-        print(sap_b1)
         SetVar(res, True)
     except Exception as e:
         SetVar(res, False)
@@ -92,17 +91,53 @@ if module == "login":
     password = GetParams("password")
     data_base = GetParams("db")
     society = GetParams("society")
-
+    sync_sap = GetParams('sync_sap')
+    async_sap = GetParams('async_sap')
+    
+    sync_sap = eval(sync_sap) if sync_sap else None
+    async_sap = eval(async_sap) if async_sap else None
+    
     try:
-        if society:
-            sap_b1.login_2(society)
+        if sync_sap or (not sync_sap and not async_sap):
+            if society:
+                sap_b1.login_2(society)
+            else:
+                sap_b1.login_1(user, password, data_base)
         else:
-            sap_b1.login_1(user, password, data_base)
+            q = Queue()
+            if society:
+                t = Thread(target=sap_b1.login_2, args=(society,))
+                t.start()
+            else:
+                t = Thread(target=sap_b1.login_1, args=(user, password, data_base))
+                t.start()
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
+if module == "wait_object":
+    form_id = GetParams("form_id")
+    item_id = GetParams("item_id")
+    timeout = GetParams("timeout") or 5
+    res = GetParams("res")
+
+    try:
+        form = sap_b1.get_form(form_id)
+        form.Select()
+        
+        time_ = 0
+        visible = False
+        while not visible or time_ <= timeout:
+            item = sap_b1.get_item(form, item_id)
+            visible = item.Visible
+        SetVar(res, visible)
+    
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+    
 if module == "click":
     form_id = GetParams("form_id")
     item_id = GetParams("item_id")

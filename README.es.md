@@ -24,28 +24,31 @@ Conectar a SAP B1. La aplicación debe estar abierta al momento de ejecutar el c
 2. Iniciar sesión en SAP B1  
 Iniciar sesión en SAP B1
 
-3. Click  
+3. Esperar  
+Eseperar por un item
+
+4. Click  
 Realiza un click en un item
 
-4. Seleccionar  
+5. Seleccionar  
 Seleccionar un item
 
-5. Activar item de menu  
+6. Activar item de menu  
 Activar item de menu
 
-6. Enviar texto o tecla  
+7. Enviar texto o tecla  
 Enviar texto o tecla a una entrada de texto. Si se deja vacío el texto, se enviará la tecla.
 
-7. Obtener texto  
+8. Obtener texto  
 Obtiene el texto de un ítem
 
-8. Click en ventana emergente  
+9. Click en ventana emergente  
 Click en ventana emergente
 
-9. Obtener datos de formularios y menus visibles  
+10. Obtener datos de formularios y menus visibles  
 Obtener datos de formularios y menus. Los dato seran sobre ls formularios y menus visibles al momento de ejecución.
 
-10. Obtener datos de matriz visible  
+11. Obtener datos de matriz visible  
 Obtener datos de matriz. La Matriz debe encontrarse visible al momento de ejecución.  
 
 
