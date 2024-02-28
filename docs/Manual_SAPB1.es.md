@@ -40,6 +40,18 @@ Iniciar sesión en SAP B1
 |Contraseña||password|
 |Nombre base datos (Opcional)||DBSociety01|
 |Sociedad (Opcional)||2|
+|Modo sincrono|Realizar conexión de modo síncrono|Checkbox|
+|Modo asincrono|Realizar conexión de modo asíncrono|Checkbox|
+
+### Esperar
+  
+Eseperar por un item
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|Formulario||form|
+|Item||item|
+|Limite de espera (Segundos - Opcional)||5|
+|Asignar resultado a una variable|Nombre de la variable donde guardar el resultado|result|
 
 ### Click
   

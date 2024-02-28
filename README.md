@@ -24,28 +24,31 @@ Connect to SAP B1. The application must be open at the time of executing the com
 2. Login to SAP B1  
 Login to SAP B1
 
-3. Click  
+3. Wait  
+Wait for an item
+
+4. Click  
 Do a click on an item
 
-4. Select  
+5. Select  
 Select an item
 
-5. Activate menu item  
+6. Activate menu item  
 Activate menu item
 
-6. Send text or key  
+7. Send text or key  
 Send text or key to a text input. If the text is empty, the key will be sent.
 
-7. Get text  
+8. Get text  
 Get text from an item
 
-8. Click on pop up  
+9. Click on pop up  
 Click on pop up window
 
-9. Get visible forms and menus data  
+10. Get visible forms and menus data  
 Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
 
-10. Get visible matrix data  
+11. Get visible matrix data  
 Get matrix data. Matrix must be visible at the moment of execution.  
 
 

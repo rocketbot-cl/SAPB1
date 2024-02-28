@@ -38,6 +38,18 @@ Entrar no SAP B1
 |Senha||password|
 |Nome do banco de dados (Opcional)||DBSociety01|
 |Sociedade (Opcional)||2|
+|Synchronous mode|Connect synchronously|Checkbox|
+|Asynchronous mode|Connect asynchronously|Checkbox|
+
+### Espere
+  
+Espere por um item
+|Parâmetros|Descrição|exemplo|
+| --- | --- | --- |
+|Forma||form|
+|Item||item|
+|Tempo limite (Segundos - Opcional)||5|
+|Atribuir resultado a uma variável|Nome da variável para armazenar o resultado|result|
 
 ### Click
   

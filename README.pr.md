@@ -24,28 +24,31 @@ Conecte-se ao SAP B1. O aplicativo deve estar aberto no momento de executar o co
 2. Entrar no SAP B1  
 Entrar no SAP B1
 
-3. Click  
+3. Espere  
+Espere por um item
+
+4. Click  
 Faça um clique em um item
 
-4. Selecione  
+5. Selecione  
 Selecione um item
 
-5. Ativar item de menu  
+6. Ativar item de menu  
 Ativar item de menu
 
-6. Enviar texto ou tecla  
+7. Enviar texto ou tecla  
 Enviar texto ou tecla a uma entrada de texto. Se deixar em branco o texto, a tecla será enviada.
 
-7. Obter texto  
+8. Obter texto  
 Obtém o texto de um item
 
-8. Clique no pop-up  
+9. Clique no pop-up  
 Clique na janela pop-up
 
-9. Obtenha formulários visíveis e dados de menus  
+10. Obtenha formulários visíveis e dados de menus  
 Get data of forms and menus. The data will be about visible forms and menus at the moment of the execution.
 
-10. Obter dados de matriz visíveis  
+11. Obter dados de matriz visíveis  
 Obter dados de matriz. A matriz deve estar visível no momento da execução.  
 
 
