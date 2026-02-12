@@ -119,18 +119,34 @@ if module == "login":
 if module == "wait_object":
     form_id = GetParams("form_id")
     item_id = GetParams("item_id")
-    timeout = GetParams("timeout") or 5
+    timeout_raw = GetParams("timeout")
     res = GetParams("res")
 
     try:
         form = sap_b1.get_form(form_id)
         form.Select()
-        
-        time_ = 0
+
+        try:
+            timeout = float(timeout_raw) if timeout_raw not in (None, "") else 5.0
+        except Exception:
+            timeout = 5.0
+
+        poll_seconds = 0.2
+        elapsed = 0.0
         visible = False
-        while not visible or time_ <= timeout:
-            item = sap_b1.get_item(form, item_id)
-            visible = item.Visible
+        while elapsed <= timeout:
+            try:
+                item = sap_b1.get_item(form, str(item_id))
+                visible = bool(getattr(item, "Visible", False))
+            except Exception:
+                visible = False
+
+            if visible:
+                break
+
+            time.sleep(poll_seconds)
+            elapsed += poll_seconds
+
         SetVar(res, visible)
     
     except Exception as e:
