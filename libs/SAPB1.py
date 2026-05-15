@@ -1,4 +1,5 @@
 import win32com.client
+import time
 try:
     from threading import Thread
     from queue import Queue, Empty
@@ -29,22 +30,28 @@ class SAP_B1:
         self.sbo_gui_api.Connect(self.connection_string)
         self.sbo_application = self.sbo_gui_api.GetApplication(-1)
 
-    def login_1(self, user, pwd, society=None):
-        # This is for the case that 
-        try:
-            form = self.get_form("821")
-            form.Items.Item("4").Click(0)
-            self.sbo_application.SendKeys(user)
-            form.Items.Item("5").Click(0)
-            self.sbo_application.SendKeys(pwd)
-        except:
-            pass
+    def wait_form(self, id_form, timeout=30, poll_seconds=0.2):
+        end_time = time.time() + float(timeout)
+        while time.time() <= end_time:
+            try:
+                return self.get_form(id_form)
+            except Exception:
+                time.sleep(poll_seconds)
+        raise Exception("Timeout waiting for SAP form '{0}'".format(id_form))
+
+    def login_1(self, user, pwd, society=None, timeout=8):
+        # Wait until login window is available before sending credentials.
+        form = self.wait_form("821", timeout=timeout)
+        form.Items.Item("4").Click(0)
+        self.sbo_application.SendKeys(user)
+        form.Items.Item("5").Click(0)
+        self.sbo_application.SendKeys(pwd)
         if society:
             print("society_1")
             q = Queue()
             t = Thread(target=click_items, args=([form.Items.Item("10000103")]), daemon=False)
             t.start()
-            form = self.get_form("820")
+            form = self.wait_form("820", timeout=timeout)
             form.Items.Item("1470000132").Click(0)
             self.sbo_application.SendKeys(society)
             form.Items.Item("19").Click(0)

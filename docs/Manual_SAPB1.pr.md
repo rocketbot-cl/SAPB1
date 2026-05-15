@@ -38,6 +38,7 @@ Entrar no SAP B1
 |Senha||password|
 |Nome do banco de dados (Opcional)||DBSociety01|
 |Sociedade (Opcional)||2|
+|Tempo limite de login (Opcional)||8|
 |Synchronous mode|Connect synchronously|Checkbox|
 |Asynchronous mode|Connect asynchronously|Checkbox|
 

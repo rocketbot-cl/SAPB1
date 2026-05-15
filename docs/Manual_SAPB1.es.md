@@ -40,6 +40,7 @@ Iniciar sesión en SAP B1
 |Contraseña||password|
 |Nombre base datos (Opcional)||DBSociety01|
 |Sociedad (Opcional)||2|
+|Tiempo de espera login (Opcional)||8|
 |Modo sincrono|Realizar conexión de modo síncrono|Checkbox|
 |Modo asincrono|Realizar conexión de modo asíncrono|Checkbox|
 

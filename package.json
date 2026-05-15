@@ -144,6 +144,7 @@
               "es": "Sociedad (Opcional)",
               "en": "Society (Optional)",
               "pr": "Sociedade (Opcional)"
+
             },
             "help": {
               "es": "Colocar posicion (numero entero) de la sociedad en la tabla. Utilizar en caso que no sea necesario el ingreso de usuario y contraseña.",
@@ -151,6 +152,22 @@
               "pr": "Coloque a posição (número inteiro) da empresa na tabela. Use caso não seja necessário inserir o nome de usuário e a senha."
             },
             "id": "society",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "8",
+            "title": {
+              "es": "Tiempo de espera login (Opcional)",
+              "en": "Login timeout (Optional)",
+              "pr": "Tempo limite de login (Opcional)"
+            },
+            "help": {
+              "es": "Tiempo maximo para esperar el formulario de login. Por defecto 8 segundos.",
+              "en": "Maximum time to wait for the login form. Default is 8 seconds.",
+              "pr": "Tempo maximo para esperar o formulario de login. O padrao e 8 segundos."
+            },
+            "id": "login_timeout",
             "css": "col-md-12"
           },
           {
