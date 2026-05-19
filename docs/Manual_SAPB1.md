@@ -38,6 +38,7 @@ Login to SAP B1
 |Password||password|
 |Database name (Optional)||DBSociety01|
 |Society (Optional)||2|
+|Login timeout (Optional)||8|
 |Synchronous mode|Connect synchronously|Checkbox|
 |Asynchronous mode|Connect asynchronously|Checkbox|
 
@@ -123,4 +124,3 @@ Get matrix data. Matrix must be visible at the moment of execution.
 |Form||form|
 |Item||item|
 |Set result to a variable|Name of the variable where the result will be stored|result|
-

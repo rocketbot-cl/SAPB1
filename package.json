@@ -1,13 +1,13 @@
 {
   "author": "Nicolas Liendro - Juan Siro",
-  "description": "Module to automate SAP Business One. | Módulo para automatizar o SAP Business One.",
+  "description": "Module to automate SAP Business One",
   "description_lang": {
     "en": "With this module you can automate SAP Business One.",
     "es": "Con este módulo puedes automatizar SAP Business One.",
     "pr": "Com este módulo você pode automatizar SAP Business One."
   },
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "3.3.6",
+  "version": "3.3.7",
   "license": "MIT",
   "homepage": "http://rocketbot.com/",
   "linux": false,
@@ -144,6 +144,7 @@
               "es": "Sociedad (Opcional)",
               "en": "Society (Optional)",
               "pr": "Sociedade (Opcional)"
+
             },
             "help": {
               "es": "Colocar posicion (numero entero) de la sociedad en la tabla. Utilizar en caso que no sea necesario el ingreso de usuario y contraseña.",
@@ -151,6 +152,22 @@
               "pr": "Coloque a posição (número inteiro) da empresa na tabela. Use caso não seja necessário inserir o nome de usuário e a senha."
             },
             "id": "society",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "placeholder": "8",
+            "title": {
+              "es": "Tiempo de espera login (Opcional)",
+              "en": "Login timeout (Optional)",
+              "pr": "Tempo limite de login (Opcional)"
+            },
+            "help": {
+              "es": "Tiempo maximo para esperar el formulario de login. Por defecto 8 segundos.",
+              "en": "Maximum time to wait for the login form. Default is 8 seconds.",
+              "pr": "Tempo maximo para esperar o formulario de login. O padrao e 8 segundos."
+            },
+            "id": "login_timeout",
             "css": "col-md-12"
           },
           {

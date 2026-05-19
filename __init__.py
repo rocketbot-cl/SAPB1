@@ -91,25 +91,38 @@ if module == "login":
     password = GetParams("password")
     data_base = GetParams("db")
     society = GetParams("society")
+    login_timeout_raw = GetParams("login_timeout")
     sync_sap = GetParams('sync_sap')
     async_sap = GetParams('async_sap')
     
     sync_sap = eval(sync_sap) if sync_sap else None
     async_sap = eval(async_sap) if async_sap else None
+
+    try:
+        login_timeout = float(login_timeout_raw) if login_timeout_raw not in (None, "") else 8.0
+        if login_timeout <= 0:
+            login_timeout = 8.0
+    except Exception:
+        login_timeout = 8.0
     
     try:
         if sync_sap or (not sync_sap and not async_sap):
             if society:
                 sap_b1.login_2(society)
             else:
-                sap_b1.login_1(user, password, data_base)
+                sap_b1.login_1(user, password, data_base, timeout=login_timeout)
         else:
-            q = Queue()
             if society:
+                q = Queue()
                 t = Thread(target=sap_b1.login_2, args=(society,))
                 t.start()
             else:
-                t = Thread(target=sap_b1.login_1, args=(user, password, data_base))
+                q = Queue()
+                t = Thread(
+                    target=sap_b1.login_1,
+                    args=(user, password, data_base),
+                    kwargs={"timeout": login_timeout}
+                )
                 t.start()
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
@@ -119,18 +132,34 @@ if module == "login":
 if module == "wait_object":
     form_id = GetParams("form_id")
     item_id = GetParams("item_id")
-    timeout = GetParams("timeout") or 5
+    timeout_raw = GetParams("timeout")
     res = GetParams("res")
 
     try:
         form = sap_b1.get_form(form_id)
         form.Select()
-        
-        time_ = 0
+
+        try:
+            timeout = float(timeout_raw) if timeout_raw not in (None, "") else 5.0
+        except Exception:
+            timeout = 5.0
+
+        poll_seconds = 0.2
+        elapsed = 0.0
         visible = False
-        while not visible or time_ <= timeout:
-            item = sap_b1.get_item(form, item_id)
-            visible = item.Visible
+        while elapsed <= timeout:
+            try:
+                item = sap_b1.get_item(form, str(item_id))
+                visible = bool(getattr(item, "Visible", False))
+            except Exception:
+                visible = False
+
+            if visible:
+                break
+
+            time.sleep(poll_seconds)
+            elapsed += poll_seconds
+
         SetVar(res, visible)
     
     except Exception as e:
