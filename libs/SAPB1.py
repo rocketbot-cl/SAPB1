@@ -6,7 +6,33 @@ try:
 except ImportError:
     from Queue import Queue, Empty
 
-def click_items(*arr_item, click_type = 0):
+CLICK_TYPE_MAP = {
+    # SAPbouiCOM.BoCellClickType (segun SDK Help)
+    "ct_Regular": 0,
+    "ct_Double": 1,
+    "ct_Linked": 2,
+    "ct_Collapsed": 3,
+    "ct_Right": 4,
+    "ct_RightNoBlocking": 5,
+}
+
+
+def normalize_click_type(click_type, default=0):
+    if click_type is None or click_type == "":
+        return default
+    if isinstance(click_type, bool):
+        return default
+    if isinstance(click_type, int):
+        return click_type
+    try:
+        return int(str(click_type))
+    except Exception:
+        pass
+    return CLICK_TYPE_MAP.get(str(click_type), default)
+
+
+def click_items(*arr_item, click_type=0):
+    click_type = normalize_click_type(click_type)
 
     for item in arr_item:
         item.Click(click_type)    
@@ -128,12 +154,22 @@ class SAP_B1:
     def do_click_grid_item(self, item, row, column, click_type):
         # item.Columns.Item(str(row)).Cells.Item(int(column)).Click(click_type)
         q = Queue()
-        t = Thread(target=click_items, args=(item.Columns.Item(str(column)).Cells.Item(int(row)), click_type), daemon=False)
+        t = Thread(
+            target=click_items,
+            args=(item.Columns.Item(str(column)).Cells.Item(int(row)),),
+            kwargs={"click_type": click_type},
+            daemon=False,
+        )
         t.start()
     
     def do_click_item(self, item, click_type):
         q = Queue()
-        t = Thread(target=click_items, args=(item, click_type), daemon=False)
+        t = Thread(
+            target=click_items,
+            args=(item,),
+            kwargs={"click_type": click_type},
+            daemon=False,
+        )
         t.start()
     
     def do_select_grid_item(self, item, row, column, method, val):
@@ -172,6 +208,3 @@ if __name__ == '__main__':
     #Dim bActiveItem As Boolean = oComboBox.Active
     sap_b1.sbo_application.SendKeys("{ENTER}")
     #item_valor = data_string.Columns.Item(str("V_2")).Cells.Item(int(1))
-    
-
-
