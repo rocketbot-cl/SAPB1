@@ -186,7 +186,15 @@ if module == "click":
         else:
             item_s = sap_b1.get_specific_item(form, item_id)
             if item.Type == 128:
-                item_s.Columns.Item(column).Click(int(row)) # Grid cell Specific click
+                # GridColumn.Click (SDK) only allows indicating whether it is a double-click (bool).
+                # It does not support right-click or other BoCellClickType values for grids.
+                ct_norm = normalize_click_type(click_type, default=0)
+                if ct_norm not in (0, 1):
+                    raise ValueError(
+                        "SAPB1 click: for Grid items (type 128) the SDK only supports ct_Regular(0) or ct_Double(1). "
+                        f"Received click_type={click_type!r} (normalized to {ct_norm})."
+                    )
+                item_s.Columns.Item(column).Click(int(row), ct_norm == 1)
             else:
                 sap_b1.do_click_grid_item(item_s, row, column, click_type)
     except Exception as e:
